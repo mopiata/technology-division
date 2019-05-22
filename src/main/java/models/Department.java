@@ -48,4 +48,14 @@ public class Department {
     public static void setmInstances(ArrayList<Department> mInstances) {
         Department.mInstances = mInstances;
     }
+
+    public static void clearAllDepartments(){
+        mInstances.clear();
+    }
+
+    public static Department findById(int id){
+        return mInstances.get(id-1);
+    }
+
+
 }

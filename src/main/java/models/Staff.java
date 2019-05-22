@@ -68,4 +68,13 @@ public class Staff {
     public static void setmInstances(ArrayList<Staff> mInstances) {
         Staff.mInstances = mInstances;
     }
+
+    public static void clearAllStaff(){
+        mInstances.clear();
+    }
+
+//    public static Staff findById(int id){
+//        return mInstances.get(id);
+//    }
+
 }
