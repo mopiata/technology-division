@@ -1,0 +1,35 @@
+{{#partial "content"}}
+
+    <h1>Add a new Staff!</h1>
+
+    <form action="/posts/new" method="post">
+        <label for="staff-name">Enter Name</label>
+        <input id="staff-name" name="staff-name" type="text">
+
+        <label for="staff-number">Enter EK Number</label>
+        <input id="staff-number" name="staff-number" type="text">
+
+        <label for="department">Enter Department</label>
+        <input id="department" name="department" type="text">
+
+        <label for="section">Enter Section</label>
+        <input id="section" name="section" type="text">
+
+        <label for="role">Enter Name</label>
+        <input id="role" name="role" type="text">
+
+        <label for="responsibilities">Enter Name</label>
+        <input id="responsibilities" name="responsibilities" type="textarea">
+
+        <button type="submit" class="btn btn-default">Add new blog post</button>
+    </form>
+
+    this.mStaffName=name;
+    this.mStaffNumber=id;
+    this.mRole=role;
+    this.mResponsibilities=responsibilities;
+    this.mDepartment=department;
+    this.mSection=section;
+{{/partial}}
+
+{{> layout.hbs}}
