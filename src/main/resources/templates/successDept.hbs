@@ -7,6 +7,12 @@
     <br>
     <a href="/">Go Home</a>
 
+    <hr>
+    <h1>Department List</h1>
+    {{#if departments}}
+        <p>{{dept-name}}</p>
+    {{/if}}
+
 {{/partial}}
 
 {{>layout.hbs}}

@@ -7,38 +7,32 @@ import java.util.List;
 public class Department {
     private int mDeptId;
     private String mDeptName;
-    private ArrayList<Section> mSections=new ArrayList<Section>();
+    private String sectionName;
+    private Section section=new Section(sectionName);
+    private static ArrayList<Section> mSections=new ArrayList<Section>();
     private static ArrayList<Department> mInstances = new ArrayList<Department>();
 
-    public Department(String name, ArrayList<Section> sections){
+    public Department(String name){
         this.mDeptName=name;
-        this.mSections=sections;
+        this.mSections.add(this.section);
         this.mInstances.add(this);
         this.mDeptId=mInstances.size();
     }
 
-    public int getmDeptId() {
-        return mDeptId;
-    }
-
-    public void setmDeptId(int mDeptId) {
-        this.mDeptId = mDeptId;
-    }
-
-    public String getmDeptName() {
+    public String getName(){
         return mDeptName;
     }
 
-    public void setmDeptName(String mDeptName) {
+    public void setName(String mDeptName){
         this.mDeptName = mDeptName;
     }
 
-    public ArrayList<Section> getmSections() {
+    public static ArrayList<Section> getmSections() {
         return mSections;
     }
 
-    public void setmSections(ArrayList<Section> mSections) {
-        this.mSections = mSections;
+    public static void setmSections(ArrayList<Section> mSections) {
+        Department.mSections = mSections;
     }
 
     public static ArrayList<Department> getmInstances() {

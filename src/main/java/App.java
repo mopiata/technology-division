@@ -44,23 +44,40 @@ public class App {
             return new ModelAndView(model,"successStaff.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("dept/new",(request, response) -> {
-            Map<String, Object> model=new HashMap<String, Object>();
-            return new ModelAndView(model,"departmentForm.hbs");
-        }, new HandlebarsTemplateEngine());
-
         post("dept/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
 
             String name=request.queryParams("dept-name");
-            Section section=new Section(request.queryParams("sections"));
-            int id=Department.getmInstances().size();
-            ArrayList<Section> sections=new ArrayList<Section>();
-
-            sections.add(section);
-
-            Department newDepartment=new Department(name,sections);
+            Department newDepartment=new Department(name);
+            model.put("departments",newDepartment);
             return new ModelAndView(model,"successDept.hbs");
         }, new HandlebarsTemplateEngine());
+
+        get("dept/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+            ArrayList<Department> departments=Department.getmInstances();
+            if(!departments.isEmpty()){
+                System.out.println(departments.get(0).getName());
+                model.put("dep",departments.get(0));
+            }
+            model.put("departments",departments);
+            return new ModelAndView(model,"departmentForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+
+//        post("dept/new",(request, response) -> {
+//            Map<String, Object> model=new HashMap<String, Object>();
+//
+//            String name=request.queryParams("dept-name");
+//            Section section=new Section(request.queryParams("sections"));
+//            int id=Department.getmInstances().size();
+//            ArrayList<Section> sections=new ArrayList<Section>();
+//
+//            sections.add(section);
+//
+//            Department newDepartment=new Department(name);
+//            return new ModelAndView(model,"successDept.hbs");
+//        }, new HandlebarsTemplateEngine());
     }
 }

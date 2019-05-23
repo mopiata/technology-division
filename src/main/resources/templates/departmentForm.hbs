@@ -6,13 +6,19 @@
         <label for="dept-name">Department Name</label>
         <input id="dept-name" name="dept-name" type="text">
 
-        <label for="sections">Section Name</label>
-        <input id="sections" name="sections" type="text">
-
-        <span class="btn btn-primary" id="add-address">Another section</span>
-
         <button type="submit" class="btn btn-default">Add new department</button>
     </form>
+
+    <hr>
+    <h1>Department List</h1>
+    {{#if departments}}
+        {{#each departments}}
+            <p>{{name}}</p>
+        {{/each}}
+    {{else}}
+        <p>No Departments</p>
+    {{/if}}
+
 {{/partial}}
 
 {{> layout.hbs}}
