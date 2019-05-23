@@ -34,11 +34,7 @@ public class App {
         get("staff/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
             ArrayList<Department> departments=Department.getmInstances();
-            ArrayList<String> sections=new ArrayList<String>();
-
-            for(Department singleDepartment:departments){
-               sections.add(singleDepartment.getSection().getSection());
-            }
+            ArrayList<Section> sections=Section.getInstances();
             System.out.println(sections);
 
             model.put("departments", departments);

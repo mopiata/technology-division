@@ -10,6 +10,7 @@ public class Section {
     public Section(String name){
         this.sectionName=name;
         this.sectionId=instances.size();
+        this.instances.add(this);
     }
 
     public int getId() {
