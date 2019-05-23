@@ -43,16 +43,23 @@ public class App {
             return new ModelAndView(model,"successStaff.hbs");
         }, new HandlebarsTemplateEngine());
 
-
-
         get("dept/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
             return new ModelAndView(model,"departmentForm.hbs");
         }, new HandlebarsTemplateEngine());
 
+        post("dept/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
 
+            String name=request.queryParams("dept-name");
+            String section=request.queryParams("sections");
+            int id=Department.getmInstances().size();
+            ArrayList<String> sections=new ArrayList<String>();
 
+            sections.add(section);
 
-
+            Department newDepartment=new Department(id,name,sections);
+            return new ModelAndView(model,"successDept.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }
