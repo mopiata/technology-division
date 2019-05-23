@@ -1,0 +1,31 @@
+{{#partial "content"}}
+    {{#if department}}
+        <h1>{{department.name}}</h1>
+        <hr>
+        <h3>Add a section</h3>
+        <form action="/dept/{{department.id}}" method="post">
+            <label for="section">Section Name</label>
+            <input id="section" name="section" type="text">
+
+            <button type="submit" class="btn btn-default">Add new section</button>
+        </form>
+        <hr>
+    {{else}}
+        <h1>Sorry, no such department. <a href="/dept/new">Go here</a> to create it!</h1>
+        <hr>
+    {{/if}}
+
+    <h3>Sections</h3>
+    {{#if sections}}
+        {{#each sections}}
+            <hr>
+            <span>Section:</span><p>{{section}}</p>
+        {{/each}}
+    {{else}}
+        <h1>No sections added.</h1>
+        <hr>
+    {{/if}}
+
+{{/partial}}
+
+{{> layout.hbs}}

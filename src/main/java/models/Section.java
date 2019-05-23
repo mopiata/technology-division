@@ -12,7 +12,7 @@ public class Section {
         this.sectionId=instances.size();
     }
 
-    public int getSectionId() {
+    public int getId() {
         return sectionId;
     }
 
@@ -20,7 +20,7 @@ public class Section {
         this.sectionId = sectionId;
     }
 
-    public String getSectionName() {
+    public String getSection() {
         return sectionName;
     }
 

@@ -10,7 +10,16 @@
         <input id="staff-number" name="staff-number" type="text">
 
         <label for="department">Enter Department</label>
-        <input id="department" name="department" type="text">
+<!--        <input id="department" name="department" type="select">-->
+        <select name="department" id="department">
+            {{#if departments}}
+                {{#each departments}}
+                        <option value="{{name}}">{{name}}</option>
+                {{/each}}
+            {{else}}
+                    <p>No Departments</p>
+            {{/if}}
+        </select>
 
         <label for="section">Enter Section</label>
         <input id="section" name="section" type="text">

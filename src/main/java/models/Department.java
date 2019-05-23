@@ -9,12 +9,12 @@ public class Department {
     private String mDeptName;
     private String sectionName;
     private Section section=new Section(sectionName);
-    private static ArrayList<Section> mSections=new ArrayList<Section>();
+    private ArrayList<Section> mSections=new ArrayList<Section>();
     private static ArrayList<Department> mInstances = new ArrayList<Department>();
 
     public Department(String name){
         this.mDeptName=name;
-        this.mSections.add(this.section);
+
         this.mInstances.add(this);
         this.mDeptId=mInstances.size();
     }
@@ -27,12 +27,29 @@ public class Department {
         this.mDeptName = mDeptName;
     }
 
-    public static ArrayList<Section> getmSections() {
+    public int getId() {
+        return mDeptId;
+    }
+
+    public void setId(int mDeptId) {
+        this.mDeptId = mDeptId;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+        this.mSections.add(this.section);
+    }
+
+    public ArrayList<Section> getSections() {
         return mSections;
     }
 
-    public static void setmSections(ArrayList<Section> mSections) {
-        Department.mSections = mSections;
+    public void setSections(ArrayList<Section> mSections) {
+        this.mSections = mSections;
     }
 
     public static ArrayList<Department> getmInstances() {
