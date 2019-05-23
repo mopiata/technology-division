@@ -45,6 +45,7 @@ public class App {
 
         post("staff/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
+            ArrayList<Staff> staff=Staff.getmInstances();
 
             String name=request.queryParams("staff-name");
             String stringEkNumber=request.queryParams("staff-number");

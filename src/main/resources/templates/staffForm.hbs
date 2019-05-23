@@ -22,7 +22,7 @@
         </select>
 
         <label for="section">Enter Section</label>
-        <select name="section" id="section">
+        <select name="section" id="section" size="5">
             {{#if sections}}
                 {{#each sections}}
                     <option value="{{section}}">{{section}}</option>
@@ -36,7 +36,7 @@
         <input id="role" name="role" type="text">
 
         <label for="responsibilities">Enter Responsibilities</label>
-        <input id="responsibilities" name="responsibilities" type="textarea">
+        <textarea id="responsibilities" name="responsibilities" rows="10" cols="30"></textarea>
 
         <button type="submit" class="btn btn-default">Add new staff</button>
     </form>

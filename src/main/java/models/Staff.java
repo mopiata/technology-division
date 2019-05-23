@@ -22,7 +22,7 @@ public class Staff {
         this.mInstances.add(this);
     }
 
-    public String getmStaffName() {
+    public String getName() {
         return mStaffName;
     }
 
@@ -30,7 +30,7 @@ public class Staff {
         this.mStaffName = mStaffName;
     }
 
-    public int getmStaffNumber() {
+    public int getNumber() {
         return mStaffNumber;
     }
 
@@ -38,7 +38,7 @@ public class Staff {
         this.mStaffNumber = mStaffNumber;
     }
 
-    public String getmRole() {
+    public String getRole() {
         return mRole;
     }
 
@@ -46,7 +46,7 @@ public class Staff {
         this.mRole = mRole;
     }
 
-    public String getmResponsibilities() {
+    public String getResponsibilities() {
         return mResponsibilities;
     }
 
@@ -54,7 +54,7 @@ public class Staff {
         this.mResponsibilities = mResponsibilities;
     }
 
-    public String getmDepartmentId() {
+    public String getDepartment() {
         return mDepartment;
     }
 

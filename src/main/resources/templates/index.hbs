@@ -1,1 +1,12 @@
+{{#partial "content"}}
+    <h1>Staff List</h1>
+    {{#if staff}}
+        {{#each staff}}
+            <h4>{{name}}</h4>
+        {{/each}}
+    {{else}}
+        <h4><a href="/staff/new">Click here</a> to start add staff</h4>
+    {{/if}}
+{{/partial}}
+
 {{> layout.hbs}}
