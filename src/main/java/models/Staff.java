@@ -11,7 +11,8 @@ public class Staff {
     private String mSection;
     private static ArrayList<Staff> mInstances = new ArrayList<Staff>();
 
-    public Staff(String name, int id, String department, String section, String role, String responsibilities){
+    public Staff(String name, int id, String department, String section,
+                 String role, String responsibilities){
         this.mStaffName=name;
         this.mStaffNumber=id;
         this.mRole=role;

@@ -20,15 +20,39 @@ public class App {
            return new ModelAndView(model,"index.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("staff/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"staffForm.hbs");
+        },new HandlebarsTemplateEngine());
+
+        post("staff/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+
+            String name=request.queryParams("staff-name");
+            String stringEkNumber=request.queryParams("staff-number");
+            int ekNumber=Integer.parseInt(stringEkNumber);
+            String department=request.queryParams("department");
+            String section=request.queryParams("section");
+            String role=request.queryParams("role");
+            String responsibilities=request.queryParams("responsibilities");
+
+            Staff newStaff=new Staff(name,ekNumber,department,section,role,responsibilities);
+
+            model.put("staff", newStaff);
+
+            return new ModelAndView(model,"successStaff.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+
         get("dept/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
             return new ModelAndView(model,"departmentForm.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("staff/new",(request, response) -> {
-            Map<String, Object> model=new HashMap<String, Object>();
-            return new ModelAndView(model,"staffForm.hbs");
-        },new HandlebarsTemplateEngine());
+
+
+
 
     }
 }
