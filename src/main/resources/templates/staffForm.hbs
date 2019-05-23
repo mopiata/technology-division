@@ -22,7 +22,15 @@
         </select>
 
         <label for="section">Enter Section</label>
-        <input id="section" name="section" type="text">
+        <select name="section" id="section">
+            {{#if sections}}
+                {{#each sections}}
+                    <option value="{{section.section}}">{{section.section}}</option>
+                {{/each}}
+            {{else}}
+                <p>No Sections</p>
+            {{/if}}
+        </select>
 
         <label for="role">Enter Role</label>
         <input id="role" name="role" type="text">

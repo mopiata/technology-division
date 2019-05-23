@@ -1,0 +1,1 @@
+web: ./build/install/technology-division/bin/technology-division

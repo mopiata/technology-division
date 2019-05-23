@@ -1,4 +1,3 @@
-import java.rmi.StubNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +14,16 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
 
+        ProcessBuilder process=new ProcessBuilder();
+        Integer port;
+        if(process.environment().get("PORT")!=null){
+            port=Integer.parseInt(process.environment().get("PORT"));
+        }else{
+            port=4567;
+        }
+
+        setPort(port);
+
         get("/",(request, response) -> {
            Map<String,Object> model = new HashMap<String,Object>();
            ArrayList<Staff> staff = Staff.getmInstances();
@@ -25,7 +34,15 @@ public class App {
         get("staff/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
             ArrayList<Department> departments=Department.getmInstances();
+            ArrayList<String> sections=new ArrayList<String>();
+
+            for(Department singleDepartment:departments){
+               sections.add(singleDepartment.getSection().getSection());
+            }
+            System.out.println(sections);
+
             model.put("departments", departments);
+            model.put("sections", sections);
 
             return new ModelAndView(model,"staffForm.hbs");
         },new HandlebarsTemplateEngine());
@@ -71,7 +88,6 @@ public class App {
 
             Department foundDepartment=Department.findById(deptId);//used to find department
             ArrayList<Section> sections = foundDepartment.getSections();
-            System.out.println(sections);
 
             model.put("department",foundDepartment);
             model.put("sections",sections);
@@ -84,7 +100,6 @@ public class App {
 
             String section=request.queryParams("section");
             Section newSection=new Section(section);
-//            ArrayList<Section> sections= new ArrayList<Section>();
 
             ArrayList<Department> departments=Department.getmInstances();
             int deptId=Integer.parseInt(request.params("id"));
@@ -92,30 +107,9 @@ public class App {
             Department foundDepartment=Department.findById(deptId);//used to find department
             foundDepartment.setSection(newSection);
 
-//            for(Department singleDepartment:departments){
-//                if(singleDepartment.getId()==deptId){
-//                    singleDepartment.setSection(newSection);
-//                }
-//            }
-
             model.put("sections",newSection);
 
             return new ModelAndView(model,"successSection.hbs");
         }, new HandlebarsTemplateEngine());
-
-
-//        post("dept/new",(request, response) -> {
-//            Map<String, Object> model=new HashMap<String, Object>();
-//
-//            String name=request.queryParams("dept-name");
-//            Section section=new Section(request.queryParams("sections"));
-//            int id=Department.getmInstances().size();
-//            ArrayList<Section> sections=new ArrayList<Section>();
-//
-//            sections.add(section);
-//
-//            Department newDepartment=new Department(name);
-//            return new ModelAndView(model,"successDept.hbs");
-//        }, new HandlebarsTemplateEngine());
     }
 }
