@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import models.Department;
+import models.Section;
 import models.Staff;
 
 import spark.ModelAndView;
@@ -52,13 +53,13 @@ public class App {
             Map<String, Object> model=new HashMap<String, Object>();
 
             String name=request.queryParams("dept-name");
-            String section=request.queryParams("sections");
+            Section section=new Section(request.queryParams("sections"));
             int id=Department.getmInstances().size();
-            ArrayList<String> sections=new ArrayList<String>();
+            ArrayList<Section> sections=new ArrayList<Section>();
 
             sections.add(section);
 
-            Department newDepartment=new Department(id,name,sections);
+            Department newDepartment=new Department(name,sections);
             return new ModelAndView(model,"successDept.hbs");
         }, new HandlebarsTemplateEngine());
     }

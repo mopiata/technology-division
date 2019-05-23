@@ -7,14 +7,14 @@ import java.util.List;
 public class Department {
     private int mDeptId;
     private String mDeptName;
-    private List<String> mSections=new ArrayList<String>();
+    private ArrayList<Section> mSections=new ArrayList<Section>();
     private static ArrayList<Department> mInstances = new ArrayList<Department>();
 
-    public Department(int id, String name, ArrayList<String> sections){
-        this.mDeptId=id;
+    public Department(String name, ArrayList<Section> sections){
         this.mDeptName=name;
         this.mSections=sections;
         this.mInstances.add(this);
+        this.mDeptId=mInstances.size();
     }
 
     public int getmDeptId() {
@@ -33,20 +33,16 @@ public class Department {
         this.mDeptName = mDeptName;
     }
 
-    public List<String> getmSections() {
+    public ArrayList<Section> getmSections() {
         return mSections;
     }
 
-    public void setmSections(List<String> mSections) {
+    public void setmSections(ArrayList<Section> mSections) {
         this.mSections = mSections;
     }
 
     public static ArrayList<Department> getmInstances() {
         return mInstances;
-    }
-
-    public static void setmInstances(ArrayList<Department> mInstances) {
-        Department.mInstances = mInstances;
     }
 
     public static void clearAllDepartments(){
