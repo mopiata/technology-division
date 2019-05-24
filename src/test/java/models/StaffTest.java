@@ -56,10 +56,18 @@ public class StaffTest {
         assertTrue(Staff.getmInstances().contains(otherStaff));
     }
 
-//    @Test
-//    public void findReturnsCorrectStaff_int() {
-//        Staff staff=addNewStaff();
-//        assertEquals(6454,Staff.findById(staff.getmStaffNumber()).getmStaffNumber());
-//    }
+    @Test
+    public void findReturnsCorrectStaff_int() {
+        Staff staff=addNewStaff();
+        assertEquals(6454,staff.getNumber());
+    }
+
+    @Test
+    public void setsStaffParametersCorrectly() {
+        Staff staff=addNewStaff();
+
+        staff.setmStaffName("Ayub Githaiga");
+        assertEquals("Ayub Githaiga",staff.getName());
+    }
 
 }

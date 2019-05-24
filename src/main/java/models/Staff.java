@@ -74,8 +74,4 @@ public class Staff {
         mInstances.clear();
     }
 
-//    public static Staff findById(int id){
-//        return mInstances.get(id);
-//    }
-
 }
