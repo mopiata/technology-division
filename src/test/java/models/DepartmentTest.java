@@ -55,4 +55,53 @@ public class DepartmentTest {
         assertTrue(Department.getmInstances().contains(department));
         assertTrue(Department.getmInstances().contains(otherDepartment));
     }
+
+    @Test
+    public void idSetCorrectly_true() {
+        Department department=addNewDepartment();
+        Department otherDepartment=addOtherDepartment();
+
+        assertEquals(2,otherDepartment.getId());
+    }
+
+    @Test
+    public void setName_nameSettingWorksCorrectly_true() {
+        Department department=addNewDepartment();
+
+        department.setName("Security");
+
+        assertEquals("Security",department.getName());
+    }
+
+    @Test
+    public void setSection_createsSectionCorrectly_true() {
+        Department department=addNewDepartment();
+        ArrayList<Section> sections=new ArrayList<>();
+        Section section=new Section("CNE");
+        Section otherSection=new Section("RNO");
+
+        sections.add(section);
+        sections.add(otherSection);
+
+        department.setSections(sections);
+
+        assertEquals(sections,department.getSections());
+    }
+
+    @Test
+    public void readSectionCorrectly_true() {
+        Department department=addNewDepartment();
+        ArrayList<Section> sections=new ArrayList<>();
+        Section section=new Section("CNE");
+        Section otherSection=new Section("RNO");
+
+        sections.add(section);
+        sections.add(otherSection);
+
+        department.setSections(sections);
+
+        assertEquals("CNE",department.getSections().get(0).getSection());
+    }
+
+
 }

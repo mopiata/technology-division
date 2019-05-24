@@ -14,7 +14,6 @@ public class Department {
 
     public Department(String name){
         this.mDeptName=name;
-
         this.mInstances.add(this);
         this.mDeptId=mInstances.size();
     }
