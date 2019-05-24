@@ -20,17 +20,11 @@ public class DepartmentTest {
     }
 
     public Department addNewDepartment(){
-        ArrayList<String> sections=new ArrayList<>();
-        sections.add("Core Network Planning");
-        sections.add("Radio Planning and Optimization");
-        return new Department(1,"NPD",sections);
+        return new Department("NPD");
     }
 
     public Department addOtherDepartment(){
-        ArrayList<String> sections=new ArrayList<>();
-        sections.add("Digital Engineering");
-        sections.add("CBS");
-        return new Department(1,"Digital IT",sections);
+        return new Department("Digital IT");
     }
 
     @Test
@@ -42,7 +36,7 @@ public class DepartmentTest {
     @Test
     public void departmentInstantiatesCorrectly_true() throws Exception{
         Department department=addNewDepartment();
-        assertEquals("NPD",department.getmDeptName());
+        assertEquals("NPD",department.getName());
     }
 
     @Test

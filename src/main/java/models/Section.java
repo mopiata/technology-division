@@ -9,8 +9,8 @@ public class Section {
 
     public Section(String name){
         this.sectionName=name;
-        this.sectionId=instances.size();
         this.instances.add(this);
+        this.sectionId=instances.size();
     }
 
     public int getId() {
@@ -31,6 +31,10 @@ public class Section {
 
     public static ArrayList<Section> getInstances() {
         return instances;
+    }
+
+    public static void clearAllSections(){
+        instances.clear();
     }
 
 }

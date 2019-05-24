@@ -36,7 +36,7 @@ public class StaffTest {
     @Test
     public void staffInstantiatesCorrectly_true() throws Exception{
         Staff staff=addNewStaff();
-        assertEquals("Margaret Opiata",staff.getmStaffName());
+        assertEquals("Margaret Opiata",staff.getName());
     }
 
     @Test
