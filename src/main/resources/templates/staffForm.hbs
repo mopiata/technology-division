@@ -3,42 +3,55 @@
     <h1>Add a new Staff!</h1>
 
     <form action="/staff/new" method="post">
-        <label for="staff-name">Enter Name</label>
-        <input id="staff-name" name="staff-name" type="text">
+        <div class="form-group">
+            <label for="staff-name">Enter Name</label>
+            <input class="form-control" id="staff-name" name="staff-name" type="text">
+        </div>
 
-        <label for="staff-number">Enter EK Number</label>
-        <input id="staff-number" name="staff-number" type="text">
 
-        <label for="department">Enter Department</label>
-<!--        <input id="department" name="department" type="select">-->
-        <select name="department" id="department">
-            {{#if departments}}
-                {{#each departments}}
+        <div class="form-group">
+            <label for="staff-number">Enter EK Number</label>
+            <input class="form-control" id="staff-number" name="staff-number" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="department">Enter Department</label>
+            <select class="form-control" name="department" id="department">
+                {{#if departments}}
+                    {{#each departments}}
                         <option value="{{name}}">{{name}}</option>
-                {{/each}}
-            {{else}}
+                    {{/each}}
+                {{else}}
                     <p>No Departments</p>
-            {{/if}}
-        </select>
+                {{/if}}
+            </select>
+        </div>
 
-        <label for="section">Enter Section</label>
-        <select name="section" id="section" size="5">
-            {{#if sections}}
-                {{#each sections}}
-                    <option value="{{section}}">{{section}}</option>
-                {{/each}}
-            {{else}}
-                <p>No Sections</p>
-            {{/if}}
-        </select>
+        <div class="form-group">
+            <label for="section">Enter Section</label>
+            <select class="form-control" name="section" id="section">
+                {{#if sections}}
+                    {{#each sections}}
+                        <option value="{{section}}">{{section}}</option>
+                    {{/each}}
+                {{else}}
+                    <p>No Sections</p>
+                {{/if}}
+            </select>
+        </div>
 
-        <label for="role">Enter Role</label>
-        <input id="role" name="role" type="text">
+        <div class="form-group">
+            <label for="role">Enter Role</label>
+            <input class="form-control" id="role" name="role" type="text">
+        </div>
 
-        <label for="responsibilities">Enter Responsibilities</label>
-        <textarea id="responsibilities" name="responsibilities" rows="10" cols="30"></textarea>
 
-        <button type="submit" class="btn btn-default">Add new staff</button>
+        <div class="form-group">
+            <label for="responsibilities">Enter Responsibilities</label>
+            <textarea class="form-control" id="responsibilities" name="responsibilities" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-info">Add new staff</button>
     </form>
 
 {{/partial}}

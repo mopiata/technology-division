@@ -7,8 +7,8 @@ import java.util.List;
 public class Department {
     private int mDeptId;
     private String mDeptName;
-    private String sectionName;
-    private Section section=new Section(sectionName);
+
+    private Section section;
     private ArrayList<Section> mSections=new ArrayList<Section>();
     private static ArrayList<Department> mInstances = new ArrayList<Department>();
 

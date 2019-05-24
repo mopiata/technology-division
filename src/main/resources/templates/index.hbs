@@ -1,12 +1,21 @@
 {{#partial "content"}}
     <h1>Staff List</h1>
-    {{#if staff}}
-        {{#each staff}}
-            <h4>{{name}}</h4>
-        {{/each}}
-    {{else}}
-        <h4><a href="/staff/new">Click here</a> to start add staff</h4>
-    {{/if}}
+    <div class="list-group">
+        {{#if staff}}
+            {{#each staff}}
+                <a href="#" class="list-group-item list-group-item-action list-group-item-info">
+                    <span>EK{{number}}</span>&nbsp;{{name}}
+                    &nbsp;&nbsp;&nbsp;
+                    {{role}}
+                    &nbsp;&nbsp;&nbsp;
+                    {{department}}
+
+                </a>
+            {{/each}}
+        {{else}}
+            <a href="/staff/new"  class="list-group-item list-group-item-action list-group-item-info">No staff to display. Click here to start add staff</a></h4>
+        {{/if}}
+    </div>
 {{/partial}}
 
 {{> layout.hbs}}

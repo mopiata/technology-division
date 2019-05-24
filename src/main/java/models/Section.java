@@ -11,6 +11,7 @@ public class Section {
         this.sectionName=name;
         this.instances.add(this);
         this.sectionId=instances.size();
+
     }
 
     public int getId() {
@@ -35,6 +36,10 @@ public class Section {
 
     public static void clearAllSections(){
         instances.clear();
+    }
+
+    public static Section findById(int id){
+        return instances.get(id-1);
     }
 
 }
