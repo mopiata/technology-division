@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class StaffTest {
@@ -70,4 +72,16 @@ public class StaffTest {
         assertEquals("Ayub Githaiga",staff.getName());
     }
 
+    @Test
+    public void updateChangesDepartmentName() throws Exception {
+        Staff staff=addNewStaff();
+        String formerName=staff.getName();
+        int formerId=staff.getId();
+
+        staff.update("Ayub Githaiga", 6454,"NPD","Core Network Planning",
+                "PS Core Engineer","Plan for the data network");
+
+        assertEquals(formerId, staff.getId());
+        assertNotEquals(formerName, staff.getName());
+    }
 }

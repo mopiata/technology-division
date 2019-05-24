@@ -81,4 +81,16 @@ public class SectionTest {
 
         assertEquals("Transmission",section.getSection());
     }
+
+    @Test
+    public void updateChangesDepartmentName() throws Exception {
+        Section section=addNewSection();
+        String formerName=section.getSection();
+        int formerId=section.getId();
+
+        section.update("Risk");
+
+        assertEquals(formerId, section.getId());
+        assertNotEquals(formerName, section.getSection());
+    }
 }

@@ -42,4 +42,7 @@ public class Section {
         return instances.get(id-1);
     }
 
+    public void update(String name) {
+        this.sectionName=name;
+    }
 }

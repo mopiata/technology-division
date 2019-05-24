@@ -1,16 +1,29 @@
 {{#partial "content"}}
+    {{#if editDepartment}}
+        <h1>Edit this Department!</h1>
+        <form action="/dept/{{editDepartment.id}}/update" method="post">
+            <div class="form-group">
+                <label for="dept-name">Department Name</label>
+                <input id="dept-name" class="form-control" name="dept-name" type="text" value="{{editDepartment.name}}">
+            </div>
 
-    <h1>Add a new Department!</h1>
 
-    <form action="/dept/new" method="post">
-        <div class="form-group">
-            <label for="dept-name">Department Name</label>
-            <input id="dept-name" class="form-control" name="dept-name" type="text">
-        </div>
-        <button type="submit" class="btn btn-info">Add new department</button>
-    </form>
+    {{else}}
+        <h1>Add a new Department!</h1>
 
-    <hr>
+        <form action="/dept/new" method="post">
+            <div class="form-group">
+                <label for="dept-name">Department Name</label>
+                <input id="dept-name" class="form-control" name="dept-name" type="text">
+            </div>
+
+    {{/if}}
+        <button type="submit" class="btn btn-info">Go!</button>
+
+        </form>
+
+        <hr>
+
     <h1>Department List</h1>
     <div class="list-group">
         {{#if departments}}

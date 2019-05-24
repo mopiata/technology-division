@@ -92,21 +92,53 @@ public class App {
             return new ModelAndView(model,"department-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/dept/:id",(request, response) -> {
+        get("/section/new", (request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+            ArrayList<Department> departments=Department.getmInstances();
+            model.put("departments",departments);
+            return new ModelAndView(model,"sectionForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/section/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
 
+            String department=request.queryParams("department");
             String section=request.queryParams("section");
+            ArrayList<Department> departments=Department.getmInstances();
             Section newSection=new Section(section);
 
-            ArrayList<Department> departments=Department.getmInstances();
-            int deptId=Integer.parseInt(request.params("id"));
-
-            Department foundDepartment=Department.findById(deptId);//used to find department
-            foundDepartment.setSection(newSection);
-
+            for(Department singleDepartment:departments){
+                if(singleDepartment.getName().equals(department)){
+                    singleDepartment.setSection(newSection);
+                }
+            }
             model.put("sections",newSection);
 
             return new ModelAndView(model,"successSection.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show a form to update a post
+        get("/dept/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfDeptToEdit=Integer.parseInt(request.params("id"));
+
+            Department editDepartment=Department.findById(idOfDeptToEdit);
+
+            model.put("editDepartment", editDepartment);
+
+            return new ModelAndView(model,"departmentForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/dept/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            String newName=request.queryParams("dept-name");
+            int idOfDeptToEdit=Integer.parseInt(request.params("id"));
+
+            Department editDepartment=Department.findById(idOfDeptToEdit);
+            editDepartment.update(newName);
+
+            return new ModelAndView(model, "successDept.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/section/:id",(request, response) -> {
@@ -119,6 +151,30 @@ public class App {
             return new ModelAndView(model,"section-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show a form to update a post
+        get("/section/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfSectionToEdit=Integer.parseInt(request.params("id"));
+
+            Section editSection=Section.findById(idOfSectionToEdit);
+
+            model.put("editSection", editSection);
+
+            return new ModelAndView(model,"sectionForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/section/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            String newName=request.queryParams("section");
+            int idOfSectionToEdit=Integer.parseInt(request.params("id"));
+
+            Section editSection=Section.findById(idOfSectionToEdit);
+            editSection.update(newName);
+
+            return new ModelAndView(model, "successSection.hbs");
+        }, new HandlebarsTemplateEngine());
+
         get("/staff/:id",(request, response) -> {
             Map<String, Object> model=new HashMap<>();
             int staffId=Integer.parseInt(request.params("id"));
@@ -128,5 +184,7 @@ public class App {
 
             return new ModelAndView(model,"staff-detail.hbs");
         }, new HandlebarsTemplateEngine());
+
+
     }
 }

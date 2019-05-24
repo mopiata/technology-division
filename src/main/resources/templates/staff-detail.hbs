@@ -1,6 +1,18 @@
 {{#partial "content"}}
-    <h1>Section Detail</h1>
-    <h3 class="list-group-item list-group-item-action list-group-item-info">{{staff.name}}</h3>
+    <h1>Staff Detail</h1>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h3 class="card-title list-group-item list-group-item-action list-group-item-info">{{staff.name}}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">EK{{staff.number}}</h6>
+            <p class="card-text">{{staff.department}}</p>
+            <p class="card-text">{{staff.section}}</p>
+            <p class="card-text">{{staff.role}}</p>
+            <p class="card-text"><strong>Responsibilities</strong><br>{{staff.responsibilities}}</p>
+            <a href="#" class="btn btn-info">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
 
 {{/partial}}
 

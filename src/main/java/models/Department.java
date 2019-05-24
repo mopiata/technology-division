@@ -63,5 +63,8 @@ public class Department {
         return mInstances.get(id-1);
     }
 
+    public void update(String name){
+        this.mDeptName = name;
+    }
 
 }

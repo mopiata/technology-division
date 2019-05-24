@@ -103,5 +103,17 @@ public class DepartmentTest {
         assertEquals("CNE",department.getSections().get(0).getSection());
     }
 
+    @Test
+    public void updateChangesDepartmentName() throws Exception {
+        Department department=addNewDepartment();
+        String formerName=department.getName();
+        ArrayList<Section> formerSections=department.getSections();
+        int formerId=department.getId();
 
+        department.update("CNS");
+
+        assertEquals(formerId, department.getId());
+        assertEquals(formerSections,department.getSections());
+        assertNotEquals(formerName, department.getName());
+    }
 }

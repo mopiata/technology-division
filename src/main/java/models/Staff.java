@@ -88,5 +88,13 @@ public class Staff {
         return mInstances.get(id-1);
     }
 
-
+    public void update(String name, int number, String department, String section,
+                       String role, String responsibilities) {
+        this.mStaffName=name;
+        this.mStaffNumber=number;
+        this.mRole=role;
+        this.mResponsibilities=responsibilities;
+        this.mDepartment=department;
+        this.mSection=section;
+    }
 }
