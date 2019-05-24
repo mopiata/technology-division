@@ -1,57 +1,111 @@
 {{#partial "content"}}
 
-    <h1>Add a new Staff!</h1>
+    {{#if editStaff}}
+        <h1>Edit Staff!</h1>
 
-    <form action="/staff/new" method="post">
-        <div class="form-group">
-            <label for="staff-name">Enter Name</label>
-            <input class="form-control" id="staff-name" name="staff-name" type="text">
-        </div>
-
-
-        <div class="form-group">
-            <label for="staff-number">Enter EK Number</label>
-            <input class="form-control" id="staff-number" name="staff-number" type="text">
-        </div>
-
-        <div class="form-group">
-            <label for="department">Enter Department</label>
-            <select class="form-control" name="department" id="department">
-                {{#if departments}}
-                    {{#each departments}}
-                        <option value="{{name}}">{{name}}</option>
-                    {{/each}}
-                {{else}}
-                    <p>No Departments</p>
-                {{/if}}
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="section">Enter Section</label>
-            <select class="form-control" name="section" id="section">
-                {{#if sections}}
-                    {{#each sections}}
-                        <option value="{{section}}">{{section}}</option>
-                    {{/each}}
-                {{else}}
-                    <p>No Sections</p>
-                {{/if}}
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="role">Enter Role</label>
-            <input class="form-control" id="role" name="role" type="text">
-        </div>
+        <form action="/staff/{{editStaff.id}}/update" method="post">
+            <div class="form-group">
+                <label for="staff-name">Enter Name</label>
+                <input class="form-control" id="staff-name" name="staff-name" type="text" value="{{editStaff.name}}">
+            </div>
 
 
-        <div class="form-group">
-            <label for="responsibilities">Enter Responsibilities</label>
-            <textarea class="form-control" id="responsibilities" name="responsibilities" rows="5"></textarea>
-        </div>
+            <div class="form-group">
+                <label for="staff-number">Enter EK Number</label>
+                <input class="form-control" id="staff-number" name="staff-number" type="text" value="{{editStaff.number}}">
+            </div>
 
-        <button type="submit" class="btn btn-info">Add new staff</button>
+            <div class="form-group">
+                <label for="department">Enter Department</label>
+                <select class="form-control" name="department" id="department">
+                    {{#if departments}}
+                        {{#each departments}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    {{else}}
+                        <p>No Departments</p>
+                    {{/if}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="section">Enter Section</label>
+                <select class="form-control" name="section" id="section">
+                    {{#if sections}}
+                        {{#each sections}}
+                            <option value="{{section}}">{{section}}</option>
+                        {{/each}}
+                    {{else}}
+                        <p>No Sections</p>
+                    {{/if}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Enter Role</label>
+                <input class="form-control" id="role" name="role" type="text" value="{{editStaff.role}}">
+            </div>
+
+
+            <div class="form-group">
+                <label for="responsibilities">Enter Responsibilities</label>
+                <textarea class="form-control" id="responsibilities" name="responsibilities" rows="5" value="{{editStaff.responsibilities}}"></textarea>
+            </div>
+    {{else}}
+        <h1>Add a new Staff!</h1>
+
+        <form action="/staff/new" method="post">
+            <div class="form-group">
+                <label for="staff-name">Enter Name</label>
+                <input class="form-control" id="staff-name" name="staff-name" type="text">
+            </div>
+
+
+            <div class="form-group">
+                <label for="staff-number">Enter EK Number</label>
+                <input class="form-control" id="staff-number" name="staff-number" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Enter Department</label>
+                <select class="form-control" name="department" id="department">
+                    {{#if departments}}
+                        {{#each departments}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    {{else}}
+                        <p>No Departments</p>
+                    {{/if}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="section">Enter Section</label>
+                <select class="form-control" name="section" id="section">
+                    {{#if sections}}
+                        {{#each sections}}
+                            <option value="{{section}}">{{section}}</option>
+                        {{/each}}
+                    {{else}}
+                        <p>No Sections</p>
+                    {{/if}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Enter Role</label>
+                <input class="form-control" id="role" name="role" type="text">
+            </div>
+
+
+            <div class="form-group">
+                <label for="responsibilities">Enter Responsibilities</label>
+                <textarea class="form-control" id="responsibilities" name="responsibilities" rows="5"></textarea>
+            </div>
+    {{/if}}
+
+
+        <button type="submit" class="btn btn-info">Go!</button>
     </form>
 
 {{/partial}}

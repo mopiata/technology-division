@@ -32,6 +32,14 @@ public class Staff {
         this.id = id;
     }
 
+    public String getSection() {
+        return mSection;
+    }
+
+    public void setmSection(String mSection) {
+        this.mSection = mSection;
+    }
+
     public String getName() {
         return mStaffName;
     }

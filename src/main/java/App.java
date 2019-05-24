@@ -185,6 +185,40 @@ public class App {
             return new ModelAndView(model,"staff-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("/staff/:id/update", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfStaffToEdit=Integer.parseInt(request.params("id"));
+
+            Staff editStaff=Staff.findById(idOfStaffToEdit);
+            ArrayList<Department> departments=Department.getmInstances();
+            ArrayList<Section> sections=Section.getInstances();
+
+            model.put("editStaff",editStaff);
+            model.put("departments",departments);
+            model.put("sections",sections);
+
+            return new ModelAndView(model, "staffForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/staff/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            String name=request.queryParams("staff-name");
+            String stringEkNumber=request.queryParams("staff-number");
+            int ekNumber=Integer.parseInt(stringEkNumber);
+            String department=request.queryParams("department");
+            String section=request.queryParams("section");
+            String role=request.queryParams("role");
+            String responsibilities=request.queryParams("responsibilities");
+            int idOfStaffToEdit=Integer.parseInt(request.params("id"));
+
+            Staff editStaff=Staff.findById(idOfStaffToEdit);
+
+            editStaff.update(name,ekNumber,department,section,role,responsibilities);
+
+            return new ModelAndView(model,"successStaff.hbs");
+        },new HandlebarsTemplateEngine());
+
 
     }
 }
