@@ -108,5 +108,25 @@ public class App {
 
             return new ModelAndView(model,"successSection.hbs");
         }, new HandlebarsTemplateEngine());
+
+        get("/section/:id",(request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int sectionId=Integer.parseInt(request.params("id"));
+
+            Section foundSection=Section.findById(sectionId);
+            model.put("section",foundSection);
+
+            return new ModelAndView(model,"section-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/staff/:id",(request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int staffId=Integer.parseInt(request.params("id"));
+
+            Staff foundStaff=Staff.findById(staffId);
+            model.put("staff",foundStaff);
+
+            return new ModelAndView(model,"staff-detail.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }

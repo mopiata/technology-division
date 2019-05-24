@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 
 public class Staff {
+    private int id;
     private String mStaffName;
     private int mStaffNumber;
     private String mRole;
@@ -11,15 +12,24 @@ public class Staff {
     private String mSection;
     private static ArrayList<Staff> mInstances = new ArrayList<Staff>();
 
-    public Staff(String name, int id, String department, String section,
+    public Staff(String name, int number, String department, String section,
                  String role, String responsibilities){
         this.mStaffName=name;
-        this.mStaffNumber=id;
+        this.mStaffNumber=number;
         this.mRole=role;
         this.mResponsibilities=responsibilities;
         this.mDepartment=department;
         this.mSection=section;
         this.mInstances.add(this);
+        this.id=mInstances.size();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -73,5 +83,10 @@ public class Staff {
     public static void clearAllStaff(){
         mInstances.clear();
     }
+
+    public static Staff findById(int id){
+        return mInstances.get(id-1);
+    }
+
 
 }
