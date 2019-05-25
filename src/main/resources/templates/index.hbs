@@ -1,21 +1,26 @@
+{{#partial "header"}}
+    <img class="header-image" src="/images/adult-communication-conference-room-1367271.jpg" width="100%">
+{{/partial}}
+
 {{#partial "content"}}
     <h1>Staff List</h1>
     <div class="list-group">
         {{#if staff}}
             {{#each staff}}
                 <a href="/staff/{{id}}" class="list-group-item list-group-item-action list-group-item-info">
-                    <span>EK{{number}}</span>&nbsp;{{name}}
+                    <span class="id">{{id}}</span>
+
+                    {{name}}
                     &nbsp;&nbsp;&nbsp;
                     {{role}}
-                    &nbsp;&nbsp;&nbsp;
-                    {{department}}
-
                 </a>
             {{/each}}
         {{else}}
-            <a href="/staff/new"  class="list-group-item list-group-item-action list-group-item-info">No staff to display. Click here to start add staff</a></h4>
+            <h4 class="list-group-item list-group-item-action list-group-item-info">No staff to display yet!</h4>
         {{/if}}
     </div>
 {{/partial}}
+
+
 
 {{> layout.hbs}}

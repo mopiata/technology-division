@@ -1,5 +1,6 @@
-/* body{
-  background-image: url("/images/adult-communication-conference-room-1367271.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-} */
+.id{
+    background-color:#ddd;
+    padding:5px;
+    border:solid 1px #209bd3;
+    border-radius:5px;
+}

@@ -8,15 +8,17 @@
 <body>
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a href="/">Home</a> </li>
-    <li role="presentation" class="active"><a href="/dept/new">Add Department</a> </li>
-    <li role="presentation" class="active"><a href="/section/new">Add Section</a> </li>
+    <li role="presentation" class="active"><a href="/dept/new">Departments</a> </li>
+    <li role="presentation" class="active"><a href="/section/new">Sections</a> </li>
     <li role="presentation" class="active"><a href="/staff/new">Add Staff</a> </li>
-
 
 </ul>
 <div class="container">
     <div class="page-header">
         <h1>Welcome to Technology. <small>To digital revolution!</small></h1>
+        {{#block "header"}}
+
+        {{/block}}
     </div>
     <div class="col-md-12">
         {{#block "content"}}
