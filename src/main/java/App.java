@@ -55,11 +55,33 @@ public class App {
             String role=request.queryParams("role");
             String responsibilities=request.queryParams("responsibilities");
 
-            Staff newStaff=new Staff(name,ekNumber,department,section,role,responsibilities);
+            boolean staffExists=false;
 
-            model.put("staff", newStaff);
+            if(staff.size()==0){
+                System.out.println("Staff to be added.");
+                staffExists=false;
+            }else {
+                for (Staff singleStaff : staff) {
+                    if (singleStaff.getNumber() == ekNumber) {
+                        System.out.println("Staff Exists!");
+                        staffExists = true;
+                        break;
+                    } else {
+                        System.out.println("Staff to be added.");
+                        staffExists = false;
+                    }
+                }
+            }
 
-            return new ModelAndView(model,"successStaff.hbs");
+
+            if(!staffExists){
+                Staff newStaff=new Staff(name,ekNumber,department,section,role,responsibilities);
+                model.put("staff", newStaff);
+                return new ModelAndView(model,"successStaff.hbs");
+            }else {
+                return new ModelAndView(model,"staffExists.hbs");
+            }
+
         }, new HandlebarsTemplateEngine());
 
         get("/staff/:id",(request, response) -> {
@@ -70,144 +92,6 @@ public class App {
             model.put("staff",foundStaff);
 
             return new ModelAndView(model,"staff-detail.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        post("dept/new",(request, response) -> {
-            Map<String, Object> model=new HashMap<String, Object>();
-
-            String name=request.queryParams("dept-name");
-            Department newDepartment=new Department(name);
-            model.put("departments",newDepartment);
-            return new ModelAndView(model,"successDept.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        get("dept/new",(request, response) -> {
-            Map<String, Object> model=new HashMap<String, Object>();
-            ArrayList<Department> departments=Department.getmInstances();
-            model.put("departments",departments);
-            return new ModelAndView(model,"departmentForm.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        get("/dept/:id", (request, response) -> {
-            Map<String, Object> model=new HashMap<>();
-
-            int deptId=Integer.parseInt(request.params("id"));//pull id - must match route segment
-
-            Department foundDepartment=Department.findById(deptId);//used to find department
-            ArrayList<Section> sections = foundDepartment.getSections();
-
-            model.put("department",foundDepartment);
-            model.put("sections",sections);
-
-            return new ModelAndView(model,"department-detail.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        get("/section/new", (request, response) -> {
-            Map<String, Object> model=new HashMap<String, Object>();
-            ArrayList<Department> departments=Department.getmInstances();
-            model.put("departments",departments);
-            return new ModelAndView(model,"sectionForm.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        post("/section/new",(request, response) -> {
-            Map<String, Object> model=new HashMap<String, Object>();
-
-            String department=request.queryParams("department");
-            String section=request.queryParams("section");
-            ArrayList<Department> departments=Department.getmInstances();
-            Section newSection=new Section(section);
-
-            for(Department singleDepartment:departments){
-                if(singleDepartment.getName().equals(department)){
-                    singleDepartment.setSection(newSection);
-                }
-            }
-            model.put("sections",newSection);
-
-            return new ModelAndView(model,"successSection.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        get("/section/:id",(request, response) -> {
-            Map<String, Object> model=new HashMap<>();
-            int sectionId=Integer.parseInt(request.params("id"));
-
-            Section foundSection=Section.findById(sectionId);
-            model.put("section",foundSection);
-
-            return new ModelAndView(model,"section-detail.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //get: show a form to update a department
-        get("/dept/:id/update",(request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            int idOfDeptToEdit=Integer.parseInt(request.params("id"));
-
-            Department editDepartment=Department.findById(idOfDeptToEdit);
-
-            model.put("editDepartment", editDepartment);
-
-            return new ModelAndView(model,"departmentForm.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        post("/dept/:id/update",(request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-
-            String newName=request.queryParams("dept-name");
-            int idOfDeptToEdit=Integer.parseInt(request.params("id"));
-
-            Department editDepartment=Department.findById(idOfDeptToEdit);
-            editDepartment.update(newName);
-
-            return new ModelAndView(model, "successDept.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //get: delete a department
-
-        get("/dept/:id/delete", (request, response) -> {
-            Map<String, Object> model=new HashMap<>();
-            int idOfDeptToDelete=Integer.parseInt(request.params("id"));
-
-            Department deleteDepartment=Department.findById(idOfDeptToDelete);
-
-            deleteDepartment.deleteDepartment();
-
-            return new ModelAndView(model,"deleteSuccess.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //get: show a form to update a section
-        get("/section/:id/update",(request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            int idOfSectionToEdit=Integer.parseInt(request.params("id"));
-
-            Section editSection=Section.findById(idOfSectionToEdit);
-
-            model.put("editSection", editSection);
-
-            return new ModelAndView(model,"sectionForm.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        post("/section/:id/update",(request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-
-            String newName=request.queryParams("section");
-            int idOfSectionToEdit=Integer.parseInt(request.params("id"));
-
-            Section editSection=Section.findById(idOfSectionToEdit);
-            editSection.update(newName);
-
-            return new ModelAndView(model, "successSection.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //get: delete a section
-        get("/section/:id/delete", (request, response) -> {
-            Map<String, Object> model=new HashMap<>();
-            int idOfSectionToDelete=Integer.parseInt(request.params("id"));
-
-            Section deleteSection=Section.findById(idOfSectionToDelete);
-
-            deleteSection.deleteSection();
-
-            return new ModelAndView(model,"deleteSuccess.hbs");
         }, new HandlebarsTemplateEngine());
 
         //get: show a form to update a staff
@@ -253,6 +137,147 @@ public class App {
             Staff deleteStaff=Staff.findById(idOfStaffToDelete);
 
             deleteStaff.deleteStaff();
+
+            return new ModelAndView(model,"deleteSuccess.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/section/new", (request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+            ArrayList<Department> departments=Department.getmInstances();
+            ArrayList<Section> sections = Section.getInstances();
+
+            model.put("departments",departments);
+            model.put("sections",sections);
+
+            return new ModelAndView(model,"sectionForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/section/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+
+            String department=request.queryParams("department");
+            String section=request.queryParams("section");
+            ArrayList<Department> departments=Department.getmInstances();
+            Section newSection=new Section(section);
+
+            for(Department singleDepartment:departments){
+                if(singleDepartment.getName().equals(department)){
+                    singleDepartment.setSection(newSection);
+                }
+            }
+            model.put("sections",newSection);
+
+            return new ModelAndView(model,"successSection.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/section/:id",(request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int sectionId=Integer.parseInt(request.params("id"));
+
+            Section foundSection=Section.findById(sectionId);
+            model.put("section",foundSection);
+
+            return new ModelAndView(model,"section-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show a form to update a section
+        get("/section/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfSectionToEdit=Integer.parseInt(request.params("id"));
+
+            Section editSection=Section.findById(idOfSectionToEdit);
+
+            model.put("editSection", editSection);
+
+            return new ModelAndView(model,"sectionForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/section/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            String newName=request.queryParams("section");
+            int idOfSectionToEdit=Integer.parseInt(request.params("id"));
+
+            Section editSection=Section.findById(idOfSectionToEdit);
+            editSection.update(newName);
+
+            return new ModelAndView(model, "successSection.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete a section
+        get("/section/:id/delete", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int idOfSectionToDelete=Integer.parseInt(request.params("id"));
+
+            Section deleteSection=Section.findById(idOfSectionToDelete);
+
+            deleteSection.deleteSection();
+
+            return new ModelAndView(model,"deleteSuccess.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("dept/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+
+            String name=request.queryParams("dept-name");
+            Department newDepartment=new Department(name);
+            model.put("departments",newDepartment);
+            return new ModelAndView(model,"successDept.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("dept/new",(request, response) -> {
+            Map<String, Object> model=new HashMap<String, Object>();
+            ArrayList<Department> departments=Department.getmInstances();
+            model.put("departments",departments);
+            return new ModelAndView(model,"departmentForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/dept/:id", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+
+            int deptId=Integer.parseInt(request.params("id"));//pull id - must match route segment
+
+            Department foundDepartment=Department.findById(deptId);//used to find department
+            ArrayList<Section> sections = foundDepartment.getSections();
+
+            model.put("department",foundDepartment);
+            model.put("sections",sections);
+
+            return new ModelAndView(model,"department-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show a form to update a department
+        get("/dept/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfDeptToEdit=Integer.parseInt(request.params("id"));
+
+            Department editDepartment=Department.findById(idOfDeptToEdit);
+
+            model.put("editDepartment", editDepartment);
+
+            return new ModelAndView(model,"departmentForm.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/dept/:id/update",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            String newName=request.queryParams("dept-name");
+            int idOfDeptToEdit=Integer.parseInt(request.params("id"));
+
+            Department editDepartment=Department.findById(idOfDeptToEdit);
+            editDepartment.update(newName);
+
+            return new ModelAndView(model, "successDept.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete a department
+        get("/dept/:id/delete", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int idOfDeptToDelete=Integer.parseInt(request.params("id"));
+
+            Department deleteDepartment=Department.findById(idOfDeptToDelete);
+
+            deleteDepartment.deleteDepartment();
 
             return new ModelAndView(model,"deleteSuccess.hbs");
         }, new HandlebarsTemplateEngine());

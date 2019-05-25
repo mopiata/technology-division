@@ -30,6 +30,22 @@
         <button type="submit" class="btn btn-info">Go!</button>
     </form>
         <hr>
+
+
+        <h1>Sections</h1>
+        <div class="list-group">
+            {{#if sections}}
+                {{#each sections}}
+                    <a href="/section/{{id}}" class="list-group-item list-group-item-action list-group-item-info">
+
+                        <p><span>{{id}}</span>&nbsp;&nbsp;{{section}}</p>
+                    </a>
+                {{/each}}
+            {{else}}
+                <h3 class="list-group-item list-group-item-action list-group-item-info">No sections added</h3>
+                <hr>
+            {{/if}}
+        </div>
 {{/partial}}
 
 {{>layout.hbs}}

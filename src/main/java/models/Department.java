@@ -70,5 +70,4 @@ public class Department {
     public void deleteDepartment(){
         mInstances.remove(mDeptId-1);
     }
-
 }

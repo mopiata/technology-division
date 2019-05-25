@@ -16,6 +16,8 @@ The application enables CRUD (Create Read Update Delate) transactions for variou
 
 Departments contain sections and staff belong to departments and sections.
 
+The application prevents double entry of staff using the Staff number
+
 ## Setup/Installation Requirements
 
 * Clone this repository
