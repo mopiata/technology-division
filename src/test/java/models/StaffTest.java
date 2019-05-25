@@ -84,4 +84,15 @@ public class StaffTest {
         assertEquals(formerId, staff.getId());
         assertNotEquals(formerName, staff.getName());
     }
+
+    @Test
+    public void deleteDeletesAStaff() {
+        Staff staff=addNewStaff();
+        Staff otherStaff=addOtherStaff();
+
+        staff.deleteStaff();
+
+        assertEquals(1,Staff.getmInstances().size());
+        assertEquals(Staff.getmInstances().get(0).getId(), 2);
+    }
 }

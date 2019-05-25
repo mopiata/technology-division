@@ -116,4 +116,14 @@ public class DepartmentTest {
         assertEquals(formerSections,department.getSections());
         assertNotEquals(formerName, department.getName());
     }
+
+    @Test
+    public void deleteDeletesADepartment() throws Exception {
+        Department department=addNewDepartment();
+        Department otherDepartment=addOtherDepartment();
+
+        department.deleteDepartment();
+        assertEquals(1,Department.getmInstances().size());
+        assertEquals(Department.getmInstances().get(0).getId(), 2);
+    }
 }

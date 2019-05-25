@@ -45,4 +45,8 @@ public class Section {
     public void update(String name) {
         this.sectionName=name;
     }
+
+    public void deleteSection(){
+        instances.remove(sectionId-1);
+    }
 }

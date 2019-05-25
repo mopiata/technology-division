@@ -93,4 +93,14 @@ public class SectionTest {
         assertEquals(formerId, section.getId());
         assertNotEquals(formerName, section.getSection());
     }
+
+    @Test
+    public void deleteDeletesASection() throws Exception {
+        Section section=addNewSection();
+        Section otherSection=addOtherSection();
+
+        section.deleteSection();
+        assertEquals(1,Section.getInstances().size());
+        assertEquals(Section.getInstances().get(0).getId(), 2);
+    }
 }

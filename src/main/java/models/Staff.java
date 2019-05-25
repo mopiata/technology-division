@@ -105,4 +105,8 @@ public class Staff {
         this.mDepartment=department;
         this.mSection=section;
     }
+
+    public void deleteStaff(){
+        mInstances.remove(id-1);
+    }
 }

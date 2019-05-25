@@ -67,4 +67,8 @@ public class Department {
         this.mDeptName = name;
     }
 
+    public void deleteDepartment(){
+        mInstances.remove(mDeptId-1);
+    }
+
 }

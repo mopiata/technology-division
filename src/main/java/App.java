@@ -62,6 +62,16 @@ public class App {
             return new ModelAndView(model,"successStaff.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("/staff/:id",(request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int staffId=Integer.parseInt(request.params("id"));
+
+            Staff foundStaff=Staff.findById(staffId);
+            model.put("staff",foundStaff);
+
+            return new ModelAndView(model,"staff-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
         post("dept/new",(request, response) -> {
             Map<String, Object> model=new HashMap<String, Object>();
 
@@ -117,7 +127,17 @@ public class App {
             return new ModelAndView(model,"successSection.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //get: show a form to update a post
+        get("/section/:id",(request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int sectionId=Integer.parseInt(request.params("id"));
+
+            Section foundSection=Section.findById(sectionId);
+            model.put("section",foundSection);
+
+            return new ModelAndView(model,"section-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show a form to update a department
         get("/dept/:id/update",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfDeptToEdit=Integer.parseInt(request.params("id"));
@@ -141,17 +161,20 @@ public class App {
             return new ModelAndView(model, "successDept.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/section/:id",(request, response) -> {
+        //get: delete a department
+
+        get("/dept/:id/delete", (request, response) -> {
             Map<String, Object> model=new HashMap<>();
-            int sectionId=Integer.parseInt(request.params("id"));
+            int idOfDeptToDelete=Integer.parseInt(request.params("id"));
 
-            Section foundSection=Section.findById(sectionId);
-            model.put("section",foundSection);
+            Department deleteDepartment=Department.findById(idOfDeptToDelete);
 
-            return new ModelAndView(model,"section-detail.hbs");
+            deleteDepartment.deleteDepartment();
+
+            return new ModelAndView(model,"deleteSuccess.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //get: show a form to update a post
+        //get: show a form to update a section
         get("/section/:id/update",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfSectionToEdit=Integer.parseInt(request.params("id"));
@@ -175,16 +198,19 @@ public class App {
             return new ModelAndView(model, "successSection.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/staff/:id",(request, response) -> {
+        //get: delete a section
+        get("/section/:id/delete", (request, response) -> {
             Map<String, Object> model=new HashMap<>();
-            int staffId=Integer.parseInt(request.params("id"));
+            int idOfSectionToDelete=Integer.parseInt(request.params("id"));
 
-            Staff foundStaff=Staff.findById(staffId);
-            model.put("staff",foundStaff);
+            Section deleteSection=Section.findById(idOfSectionToDelete);
 
-            return new ModelAndView(model,"staff-detail.hbs");
+            deleteSection.deleteSection();
+
+            return new ModelAndView(model,"deleteSuccess.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show a form to update a staff
         get("/staff/:id/update", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfStaffToEdit=Integer.parseInt(request.params("id"));
@@ -219,6 +245,17 @@ public class App {
             return new ModelAndView(model,"successStaff.hbs");
         },new HandlebarsTemplateEngine());
 
+        //get: delete a staff
+        get("/staff/:id/delete", (request, response) -> {
+            Map<String, Object> model=new HashMap<>();
+            int idOfStaffToDelete=Integer.parseInt(request.params("id"));
+
+            Staff deleteStaff=Staff.findById(idOfStaffToDelete);
+
+            deleteStaff.deleteStaff();
+
+            return new ModelAndView(model,"deleteSuccess.hbs");
+        }, new HandlebarsTemplateEngine());
 
     }
 }
